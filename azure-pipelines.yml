@@ -37,12 +37,13 @@ steps:
       {
         "files": [
           {
-            "pattern": "/*.jar",
-            "target": "libs-release-local"
+            "pattern": "*.jar",
+            "target": "qa-artifactory-nano-libs-release-local/"
           }
         ]
       }
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
     failNoOp: true
