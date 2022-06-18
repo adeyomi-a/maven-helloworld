@@ -1,0 +1,25 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: ArtifactoryMaven@2
+  inputs:
+    mavenPomFile: 'nano-app/pom.xml'
+    goals: 'install'
+    artifactoryResolverService: 'QA-Artifactory'
+    targetResolveReleaseRepo: 'qa-artifactory-nano-libs-release'
+    targetResolveSnapshotRepo: 'qa-artifactory-nano-libs-snapshot'
+    artifactoryDeployService: 'QA-Artifactory'
+    targetDeployReleaseRepo: 'qa-artifactory-nano-libs-release-local'
+    targetDeploySnapshotRepo: 'qa-artifactory-nano-libs-snapshot-local'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
