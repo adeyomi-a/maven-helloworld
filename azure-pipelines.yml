@@ -6,6 +6,13 @@
 trigger:
 - dev
 
+pr:
+ branches:
+   include:
+     - main
+     - dev
+
+
 pool:
   vmImage: ubuntu-latest
 
